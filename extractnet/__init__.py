@@ -1,6 +1,7 @@
 from extractnet.pipeline import Extractor
+from .version import __version__ as canonical_version
 
-__version__ = '2.0.7'
+__version__ = canonical_version
 
 
 _LOADED_MODELS = {}

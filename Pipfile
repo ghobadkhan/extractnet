@@ -1,0 +1,42 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[[source]]
+url = "https://github.com/scrapinghub/sklearn-crfsuite"
+verify_ssl = true
+name = "github"
+
+[[source]]
+url = "git+https://github.com/scrapinghub/sklearn-crfsuite@main"
+verify_ssl = true
+name = "github-862"
+
+[[source]]
+url = "git+https://github.com/scrapinghub/sklearn-crfsuite@main"
+verify_ssl = true
+name = "github-379"
+
+[packages]
+scikit-learn = "*"
+cython = "*"
+beautifulsoup4 = "*"
+htmldate = "*"
+ftfy = "*"
+lxml = "*"
+numpy = "*"
+pytest = "*"
+pytest-cov = "*"
+scipy = "*"
+tld = "*"
+dateparser = "*"
+joblib = "*"
+onnxruntime = "*"
+sklearn-crfsuite = {editable = true, git = "https://github.com/scrapinghub/sklearn-crfsuite"}
+setuptools = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.12"

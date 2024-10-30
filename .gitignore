@@ -6,9 +6,11 @@ dist/
 venv/
 .vscode/
 extractnet.egg-info
-env
+.venv/
+.env
 # IDEs
 .idea/
+.vscode/
 
 # cython temporary files
 extractnet/blocks.cpp

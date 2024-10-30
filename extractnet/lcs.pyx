@@ -70,7 +70,7 @@ def print_diff(X, Y):
                 diff.append("- " + X[i-1])
                 i -= 1
     diff.reverse()
-    print diff
+    print(diff)
 
 
 

@@ -24,9 +24,9 @@
 
 import os.path
 import platform
-from setuptools import setup
+from setuptools import setup, Extension
 # have to import `Extension` after `setuptools.setup`
-from distutils.extension import Extension
+# from distutils.extension import Extension
 import sys
 import re, io
 from Cython.Distutils import build_ext
@@ -51,39 +51,46 @@ ext_modules = [
     Extension('extractnet.lcs',
               sources=["extractnet/lcs.pyx"],
               include_dirs=[get_include()],
-              language="c++"),
+              language="c++",
+              define_macros=[("NPY_NO_DEPRECATED_API", "NPY_1_7_API_VERSION")]),
     Extension('extractnet.blocks',
               sources=["extractnet/blocks.pyx"],
               include_dirs=(lxml.get_include() + find_libxml2_include()),
               language="c++",
-              libraries=['xml2']),
+              libraries=['xml2'],
+              define_macros=[("NPY_NO_DEPRECATED_API", "NPY_1_7_API_VERSION")]),
     Extension('extractnet.features._readability',
               sources=["extractnet/features/_readability.pyx"],
               include_dirs=[get_include()],
               extra_compile_args=['-std=c++11'],
-              language="c++"),
+              language="c++",
+              define_macros=[("NPY_NO_DEPRECATED_API", "NPY_1_7_API_VERSION")]),
     Extension('extractnet.features._kohlschuetter',
               sources=["extractnet/features/_kohlschuetter.pyx"],
               include_dirs=[get_include()],
-              language="c++"),
+              language="c++",
+              define_macros=[("NPY_NO_DEPRECATED_API", "NPY_1_7_API_VERSION")]),
     Extension('extractnet.features._weninger',
               sources=["extractnet/features/_weninger.pyx"],
               include_dirs=[get_include()],
-              language="c++"),
+              language="c++",
+              define_macros=[("NPY_NO_DEPRECATED_API", "NPY_1_7_API_VERSION")]),
 ]
 
 this_directory = os.path.abspath(os.path.dirname(__file__))
 with open(os.path.join(this_directory, 'README.md'), encoding='utf-8') as f:
     long_description = f.read()
 
-__version__ = re.search(
-    r'__version__\s*=\s*[\'"]([^\'"]*)[\'"]',  # It excludes inline comment too
-    io.open('extractnet/__init__.py', encoding='utf_8_sig').read()
-    ).group(1)
+
+# Executes the contents of 'extractnet/version.py' as global variables
+# This replaces the elaborate usage of regex to read the version
+# The canonical version number is now located in the above address so both setuptools
+# and 'extractnet/__init__.py' can read it.
+exec(open("extractnet/version.py").read())
 
 setup(
     name='extractnet',
-    version=__version__,
+    version=__version__, # type: ignore - __version__ is set by exec
     description='Extract the main article content (and optionally comments) from a web page',
     author='Peter',
     author_email='sales@currentsapi.services',
@@ -122,23 +129,23 @@ setup(
         'extractnet.sequence_tagger': 'extractnet/sequence_tagger' },
     package_data={'extractnet': ['pickled_models/*/*', 'models/*', '*', 'features/*']},
     cmdclass={'build_ext': build_ext},
-    ext_modules=cythonize(ext_modules),
+    ext_modules=cythonize(ext_modules, language_level = "-3"),
     setup_requires = [
         'lxml',
-        'Cython>=0.21.1',
+        'Cython>=3.0.0',
     ],
     install_requires=[
         'cchardet >= 2.1.7',
-        'beautifulsoup4==4.9.3',
-        'ftfy>=4.1.0,<5.0.0',
-        'numpy>=1.19.0',
+        'beautifulsoup4>=4.12.0',
+        'ftfy>=4.1.0',
+        'numpy>=2.0.0',
         'onnxruntime>=1.9.0',
-        'scikit-learn>=0.22.0',
-        'tld==0.12.6',
-        'scipy>=0.17.0',
-        'sklearn-crfsuite==0.3.6',
+        'scikit-learn>=1.5.2',
+        'tld>=0.12.6',
+        'scipy>=1.0.0',
+        'sklearn-crfsuite>=0.5.0',
         'dateparser>=1.1.0',
-        'joblib>=1.1.0',
-        'htmldate==0.7.2'
+        'joblib>=1.4.2',
+        'htmldate>=1.9.0'
     ]
 )
