@@ -3,7 +3,6 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 name = "pypi"
 
-
 [packages]
 scikit-learn = "*"
 cython = "*"
@@ -20,9 +19,10 @@ dateparser = "*"
 joblib = "*"
 onnxruntime = "*"
 sklearn-crfsuite = {editable = true, git = "https://github.com/scrapinghub/sklearn-crfsuite"}
-setuptools = "*"
 
 [dev-packages]
+setuptools = "*"
+build = "*"
 
 [requires]
 python_version = "3.12"

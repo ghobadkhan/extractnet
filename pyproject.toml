@@ -1,0 +1,69 @@
+[build-system]
+requires = ["setuptools", "wheel", "Cython>=3.0.0","lxml","numpy"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "extractnet"
+dynamic = ["version","readme"]
+description = "Extract the main article content (and optionally comments) from a web page"
+authors = [
+    {name = "Peter", email = "sales@currentsapi.services"},
+    {name = "Arian Ghobadi", email = "arian.ghb@gmail.com"}
+]
+license = {text = "MIT"}
+keywords = ["automatic content extraction", "web page dechroming", "HTML parsing"]
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Web Environment",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "Topic :: Internet :: WWW/HTTP",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12"
+]
+dependencies = [
+    "cchardet >= 2.1.7",
+    "beautifulsoup4>=4.12.0",
+    "ftfy>=4.1.0",
+    "numpy>=2.0.0",
+    "onnxruntime>=1.9.0",
+    "scikit-learn>=1.5.2",
+    "tld>=0.12.6",
+    "scipy>=1.0.0",
+    "sklearn-crfsuite @ git+https://github.com/scrapinghub/sklearn-crfsuite@main",
+    "dateparser>=1.1.0",
+    "joblib>=1.4.2",
+    "htmldate>=1.9.0",
+    "lxml"
+]
+optional-dependencies = { dev =  ["Cython>=3.0.0"]}
+requires-python = ">=3.9"
+urls = { Homepage = "https://github.com/ghobadkhan/extractnet" }
+
+
+
+# [project.optional-dependencies]
+# dev = ["Cython>=3.0.0"]
+
+[tool.setuptools.package-data]
+"extractnet" = ["pickled_models/*/*", "models/*", "*", "features/*"]
+
+[tool.setuptools]
+packages = [
+    "extractnet",
+    "extractnet.features",
+    "extractnet.metadata_extraction",
+    "extractnet.sequence_tagger"
+]
+package-dir = {"" = "src"}
+include-package-data = true
+
+
+[tool.setuptools.dynamic]
+version = {attr = "extractnet.version.__version__"}
+readme = {file = "README.md", content-type = "text/markdown"}

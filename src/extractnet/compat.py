@@ -1,24 +1,12 @@
 import sys
+import pickle
+from io import BytesIO as bytes_io
 
-# Python 2 vs 3 compatibility
-PY2 = int(sys.version[0]) == 2
-
-if PY2:
-    range_ = xrange
-    bytes_ = str
-    unicode_ = unicode
-    string_ = (str, unicode)
-    from itertools import izip as zip_
-    import cPickle as pickle
-    from StringIO import StringIO as bytes_io
-else:
-    range_ = range
-    bytes_ = bytes
-    unicode_ = str
-    string_ = (bytes, str)
-    zip_ = zip
-    import pickle
-    from io import BytesIO as bytes_io
+# range_ = range
+# bytes_ = bytes
+# unicode_ = str
+string_ = (bytes, str)
+# zip_ = zip
 
 
 def str_cast(maybe_bytes, encoding='utf-8'):
@@ -32,7 +20,7 @@ def str_cast(maybe_bytes, encoding='utf-8'):
     encoding  : str, default='utf-8'
         encoding to be used when decoding bytes
     """
-    if isinstance(maybe_bytes, bytes_):
+    if isinstance(maybe_bytes, bytes):
         return maybe_bytes.decode(encoding)
     else:
         return maybe_bytes
@@ -49,7 +37,7 @@ def bytes_cast(maybe_str, encoding='utf-8'):
     encoding  : str, default='utf-8'
         encoding to be used when encoding string
     """
-    if isinstance(maybe_str, unicode_):
+    if isinstance(maybe_str, str):
         return maybe_str.encode(encoding)
     else:
         return maybe_str
@@ -108,7 +96,7 @@ def str_dict_cast(dict_, include_keys=True, include_vals=True, **kwargs):
     """
     new_keys = str_list_cast(dict_.keys(), **kwargs) if include_keys else dict_.keys()
     new_vals = str_list_cast(dict_.values(), **kwargs) if include_vals else dict_.values()
-    new_dict = dict(zip_(new_keys, new_vals))
+    new_dict = dict(zip(new_keys, new_vals))
     return new_dict
 
 
@@ -131,7 +119,7 @@ def bytes_dict_cast(dict_, include_keys=True, include_vals=True, **kwargs):
     """
     new_keys = bytes_list_cast(dict_.keys(), **kwargs) if include_keys else dict_.keys()
     new_vals = bytes_list_cast(dict_.values(), **kwargs) if include_vals else dict_.values()
-    new_dict = dict(zip_(new_keys, new_vals))
+    new_dict = dict(zip(new_keys, new_vals))
     return new_dict
 
 
@@ -261,26 +249,26 @@ def bytes_block_list_cast(blocks, **kwargs):
     return [bytes_block_cast(block, **kwargs) for block in blocks]
 
 
-# scikit-learn version compatibility
-from sklearn import __version__ as sklearn_version
+# # scikit-learn version compatibility
+# from sklearn import __version__ as sklearn_version
 
-if sklearn_version < '0.18.0':
-    from sklearn.cross_validation import train_test_split
-    from sklearn.grid_search import GridSearchCV
-else:
-    from sklearn.model_selection import train_test_split
-    from sklearn.model_selection import GridSearchCV
+# if sklearn_version < '0.18.0':
+#     from sklearn.cross_validation import train_test_split
+#     from sklearn.grid_search import GridSearchCV
+# else:
+#     from sklearn.model_selection import train_test_split
+#     from sklearn.model_selection import GridSearchCV
 
-# generate model paths
-if '0.15.2' <= sklearn_version <= '0.17.1':
-    if PY2:
-        model_path = 'py2_sklearn_0.15.2_0.17.1'
-    else:
-        model_path = 'py3_sklearn_0.15.2_0.17.1'
-elif sklearn_version >= '0.18.0':
-    if PY2:
-        model_path = 'py2_sklearn_0.18.0'
-    else:
-        model_path = 'py3_sklearn_0.18.0'
-else:
-    raise Exception('incompatible scikit-learn version: "{}"'.format(sklearn_version))
+# # generate model paths
+# if '0.15.2' <= sklearn_version <= '0.17.1':
+#     if PY2:
+#         model_path = 'py2_sklearn_0.15.2_0.17.1'
+#     else:
+#         model_path = 'py3_sklearn_0.15.2_0.17.1'
+# elif sklearn_version >= '0.18.0':
+#     if PY2:
+#         model_path = 'py2_sklearn_0.18.0'
+#     else:
+#         model_path = 'py3_sklearn_0.18.0'
+# else:
+#     raise Exception('incompatible scikit-learn version: "{}"'.format(sklearn_version))

@@ -13,15 +13,15 @@ extractnet.egg-info
 .vscode/
 
 # cython temporary files
-extractnet/blocks.cpp
-extractnet/blocks.html
-extractnet/lcs.cpp
-extractnet/lcs.html
-extractnet/_weninger.cpp
-extractnet/readability.cpp
-extractnet/features/_readability.cpp
-extractnet/features/_kohlschuetter.cpp
-extractnet/features/_weninger.cpp
+src/extractnet/blocks.cpp
+src/extractnet/blocks.html
+src/extractnet/lcs.cpp
+src/extractnet/lcs.html
+src/extractnet/_weninger.cpp
+src/extractnet/readability.cpp
+src/extractnet/features/_readability.cpp
+src/extractnet/features/_kohlschuetter.cpp
+src/extractnet/features/_weninger.cpp
 
 documents/
 output/
