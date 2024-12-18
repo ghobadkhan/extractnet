@@ -2,11 +2,6 @@ import sys
 import pickle
 from io import BytesIO as bytes_io
 
-# range_ = range
-# bytes_ = bytes
-# unicode_ = str
-string_ = (bytes, str)
-# zip_ = zip
 
 
 def str_cast(maybe_bytes, encoding='utf-8'):

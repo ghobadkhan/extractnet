@@ -19,6 +19,7 @@ dateparser = "*"
 joblib = "*"
 onnxruntime = "*"
 sklearn-crfsuite = {editable = true, git = "https://github.com/scrapinghub/sklearn-crfsuite"}
+requests = "*"
 
 [dev-packages]
 setuptools = "*"

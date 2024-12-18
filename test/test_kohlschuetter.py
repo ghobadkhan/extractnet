@@ -6,9 +6,9 @@ import numpy as np
 import pytest
 from lxml import etree
 
-from extractnet import Blockifier, BlockifyError
+from extractnet.blocks import Blockifier, BlockifyError
 from extractnet.features import KohlschuetterFeatures
-from extractnet.compat import range_, str_cast
+from extractnet.compat import str_cast
 
 
 @pytest.fixture(scope="module")
@@ -25,7 +25,7 @@ def block_output_tokens(blocks, true_tokens):
     true_tokens = a list of true tokens
     """
     assert len(blocks) == len(true_tokens)
-    for k in range_(len(blocks)):
+    for k in range(len(blocks)):
         block_tokens = re.split(r"\s+", blocks[k].text.strip())
         assert block_tokens == true_tokens[k]
 
@@ -33,13 +33,13 @@ def block_output_tokens(blocks, true_tokens):
 def link_output_tokens(blocks, true_tokens):
     assert len(blocks) == len(true_tokens)
     link_tokens = [ele.link_tokens for ele in blocks]
-    for k in range_(len(link_tokens)):
+    for k in range(len(link_tokens)):
         assert link_tokens[k] == true_tokens[k]
 
 
 def css_output_tokens(blocks, attrib, true_tokens):
     assert len(blocks) == len(true_tokens)
-    for k in range_(len(blocks)):
+    for k in range(len(blocks)):
         css_tokens = re.split(r"\s+", blocks[k].css[attrib].strip())
         assert css_tokens == true_tokens[k]
 

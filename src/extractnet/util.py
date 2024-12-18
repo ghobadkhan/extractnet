@@ -11,9 +11,8 @@ import os
 from sklearn.pipeline import FeatureUnion, make_union
 import ftfy
 import dateparser
-import regex # use by dateparser
+import re # use by dateparser
 
-from .compat import range_, string_
 from .features import get_feature
 from .sequence_tagger.models import NON_WORD_CHAR
 # for sanity check function
@@ -50,13 +49,13 @@ def dameraulevenshtein(seq1, seq2):
     # However, only the current and two previous rows are needed at once,
     # so we only store those.
     oneago = None
-    thisrow = list(range_(1, len(seq2) + 1)) + [0]
-    for x in range_(len(seq1)):
+    thisrow = list(range(1, len(seq2) + 1)) + [0]
+    for x in range(len(seq1)):
         # Python lists wrap around for negative indices, so put the
         # leftmost column at the *end* of the list. This matches with
         # the zero-indexed strings and saves extra calculation.
         twoago, oneago, thisrow = oneago, thisrow, [0] * len(seq2) + [x + 1]
-        for y in range_(len(seq2)):
+        for y in range(len(seq2)):
             delcost = oneago[y] + 1
             addcost = thisrow[y - 1] + 1
             subcost = oneago[y - 1] + (seq1[x] != seq2[y])
@@ -143,11 +142,11 @@ def get_and_union_features(features):
     if isinstance(features, (list, tuple)):
         if isinstance(features[0], tuple):
             return FeatureUnion(features)
-        elif isinstance(features[0], string_):
+        elif isinstance(features[0], str):
             return FeatureUnion([(feature, get_feature(feature)) for feature in features])
         else:
             return make_union(*features)
-    elif isinstance(features, string_):
+    elif isinstance(features, str):
         return get_feature(features)
     else:
         return features
@@ -222,7 +221,7 @@ def attribute_sanity_check(content, **kwargs):
         date = content['date']
         try:
             content['date'] = dateparser.parse(date)
-        except regex._regex_core.error:
+        except re.error:
             pass
 
     if 'url' in kwargs and 'date' in content:

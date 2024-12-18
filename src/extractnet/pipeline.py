@@ -5,7 +5,6 @@ import dateparser
 from sklearn.base import BaseEstimator, ClassifierMixin
 from .metadata_extraction.metadata import extract_metadata
 
-from .compat import unicode_
 from .util import priority_merge, get_module_res, remove_empty_keys, attribute_sanity_check
 from .nn_models import NewsNet
 from .name_crf import AuthorExtraction
@@ -61,7 +60,7 @@ class Extractor(BaseEstimator, ClassifierMixin):
         metadata_mining=True, 
         **kwargs):
         
-        if isinstance(html, (str, bytes, unicode_, np.unicode_)):
+        if isinstance(html, (str, bytes)):
             documents_meta_data = {}
             if metadata_mining:
                 documents_meta_data = self.extract_one_meta(html)
