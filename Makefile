@@ -1,3 +1,8 @@
+SPHINXOPTS    ?=
+SPHINXBUILD   ?= sphinx-build
+SOURCEDIR     = source
+BUILDDIR      = build
+
 # build inplace for unit tests to pass (since they are run from this
 # top level directory we need the .so files to be in the src tree
 # when they run.
@@ -20,7 +25,3 @@ pytest:
 # install: build
 #	python setup.py install
 
-install-pip: build
-	pip install .
-
-install: install-pip

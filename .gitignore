@@ -25,6 +25,7 @@ src/extractnet/features/_weninger.cpp
 
 documents/
 output/
+_build/
 
 .coverage*
 

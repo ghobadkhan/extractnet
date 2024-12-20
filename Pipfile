@@ -24,6 +24,15 @@ requests = "*"
 [dev-packages]
 setuptools = "*"
 build = "*"
+sphinx = "==7.4.7"
+sphinx-autoapi = "==3.2.1"
+sphinx-pdj-theme = "==0.4.0"
+sphinxcontrib-applehelp = "==2.0.0"
+sphinxcontrib-devhelp = "==2.0.0"
+sphinxcontrib-htmlhelp = "==2.1.0"
+sphinxcontrib-jsmath = "==1.0.1"
+sphinxcontrib-qthelp = "==2.0.0"
+sphinxcontrib-serializinghtml = "==2.0.0"
 
 [requires]
 python_version = "3.12"
