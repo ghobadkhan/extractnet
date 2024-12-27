@@ -23,6 +23,10 @@ sleep:
 
 build-show: build sleep show
 
+clean:
+	@ rm -rf _build/
+	@echo "All build files removed."
+
 	
 # Put it first so that "make" without argument is like "make help".
 help:

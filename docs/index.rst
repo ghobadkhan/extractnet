@@ -10,8 +10,18 @@ Add your content using ``reStructuredText`` syntax. See the
 `reStructuredText <https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html>`_
 documentation for details.
 
+1. The problem
+
+   1.1. Yes
+
+   .. error::
+
+      Thta's
+
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
+
+   The Journey <the_journey.rst>
 
