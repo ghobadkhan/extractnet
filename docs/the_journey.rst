@@ -50,6 +50,8 @@ However, there are some pro
 
    OpenAI and models like **Phind** are promising
 
+   There's also a whole list of local LLMs. More info at `This Subreddit <https://www.reddit.com/r/LocalLLaMA/>`_
+
    3.2. Extractnet
 
    This is the main subject of this project. It's forked from `The original project <https://github.com/currentslab/extractnet>`_.
@@ -61,7 +63,7 @@ However, there are some pro
 
    3.4. Retrieval-Augmented Generation (RAG):
 
-   This can't be directly applied toweb scraping; however, it's a family of methods designed 
+   This can't be directly applied to web scraping; however, it's a family of methods designed 
    to retrieve the body of knowledge from scanned documents (with tables, figures, etc) and
    add them to a LLM. Later we can ask the LLM questions related to that body of knowledge.
 
